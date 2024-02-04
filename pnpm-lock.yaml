@@ -82,8 +82,8 @@ importers:
         specifier: 8.2.9
         version: 8.2.9
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       '@types/node':
         specifier: 16.11.7
         version: 16.11.7
@@ -233,7 +233,7 @@ importers:
         version: 6.1.13
       ts-jest:
         specifier: 27.1.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@16.11.7)(typescript@4.9.5)
@@ -602,7 +602,7 @@ importers:
         version: 9.2.4
       ts-jest:
         specifier: ^27.0.7
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-loader:
         specifier: ~9.4.0
         version: 9.4.2(typescript@4.9.5)(webpack@5.78.0)
@@ -2202,8 +2202,8 @@ importers:
         specifier: ^5.0.2
         version: 5.0.2(rollup@3.20.2)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       '@types/node':
         specifier: ^14.14.16
         version: 14.18.42
@@ -2269,7 +2269,7 @@ importers:
         version: 0.8.5
       ts-jest:
         specifier: ^27.1.3
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -2296,8 +2296,8 @@ importers:
         specifier: ^3.5.24
         version: 3.5.38
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       jest:
         specifier: ^27.1.0
         version: 27.5.1(ts-node@10.9.1)
@@ -2819,8 +2819,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       '@types/newrelic':
         specifier: ^9
         version: 9.14.0
@@ -2862,7 +2862,7 @@ importers:
         version: 9.2.4
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -2944,8 +2944,8 @@ importers:
         version: link:../../libs/shared
     devDependencies:
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       '@types/node':
         specifier: ^14.6.0
         version: 14.18.42
@@ -2963,7 +2963,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       typedoc:
         specifier: ^0.24.0
         version: 0.24.6(typescript@4.9.5)
@@ -3027,8 +3027,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       codecov:
         specifier: ^3.5.0
         version: 3.8.3
@@ -3058,7 +3058,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -3091,8 +3091,8 @@ importers:
         version: 9.0.1
     devDependencies:
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       '@types/lodash.get':
         specifier: ^4.4.6
         version: 4.4.7
@@ -3131,7 +3131,7 @@ importers:
         version: 0.0.0
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       typedoc:
         specifier: ^0.24.0
         version: 0.24.6(typescript@4.9.5)
@@ -3491,8 +3491,8 @@ importers:
         version: 4.6.2
     devDependencies:
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       '@types/lodash.get':
         specifier: ^4.4.6
         version: 4.4.7
@@ -3522,7 +3522,7 @@ importers:
         version: 0.0.0
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       typedoc:
         specifier: ^0.24.0
         version: 0.24.6(typescript@4.9.5)
@@ -4113,8 +4113,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       codecov:
         specifier: ^3.5.0
         version: 3.8.3
@@ -4144,7 +4144,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -4798,8 +4798,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       codecov:
         specifier: ^3.5.0
         version: 3.8.3
@@ -4829,7 +4829,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -4853,8 +4853,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       '@types/node-mailjet':
         specifier: ^3.3.7
         version: 3.3.9
@@ -4887,7 +4887,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -4954,8 +4954,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       codecov:
         specifier: ^3.5.0
         version: 3.8.3
@@ -4991,7 +4991,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -5208,8 +5208,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       codecov:
         specifier: ^3.5.0
         version: 3.8.3
@@ -5239,7 +5239,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.7
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -5266,8 +5266,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       codecov:
         specifier: ^3.5.0
         version: 3.8.3
@@ -5297,7 +5297,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -5321,8 +5321,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       '@types/nodemailer':
         specifier: ^6.4.4
         version: 6.4.7
@@ -5355,7 +5355,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.7
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -5480,8 +5480,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       codecov:
         specifier: ^3.5.0
         version: 3.8.3
@@ -5511,7 +5511,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -5581,8 +5581,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       codecov:
         specifier: ^3.5.0
         version: 3.8.3
@@ -5612,7 +5612,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -5811,7 +5811,7 @@ importers:
     dependencies:
       '@novu/stateless':
         specifier: 0.22.0
-        version: link:../../packages/stateless
+        version: 0.22.0
       axios:
         specifier: ^1.6.2
         version: 1.6.2
@@ -5949,8 +5949,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       codecov:
         specifier: ^3.5.0
         version: 3.8.3
@@ -5980,7 +5980,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -6004,8 +6004,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       codecov:
         specifier: ^3.5.0
         version: 3.8.3
@@ -6035,7 +6035,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -6062,8 +6062,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       codecov:
         specifier: ^3.5.0
         version: 3.8.3
@@ -6093,7 +6093,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -6264,8 +6264,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       codecov:
         specifier: ^3.5.0
         version: 3.8.3
@@ -6295,7 +6295,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -6319,8 +6319,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       codecov:
         specifier: ^3.5.0
         version: 3.8.3
@@ -6350,7 +6350,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -6545,8 +6545,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(nyc@15.1.0)
       '@types/jest':
-        specifier: 29.5.2
-        version: 29.5.2
+        specifier: 29.5.12
+        version: 29.5.12
       codecov:
         specifier: ^3.5.0
         version: 3.8.3
@@ -6576,7 +6576,7 @@ importers:
         version: 3.0.2
       ts-jest:
         specifier: ^27.0.5
-        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.2)(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5)
       ts-node:
         specifier: ~10.9.1
         version: 10.9.1(@types/node@14.18.42)(typescript@4.9.5)
@@ -15335,7 +15335,7 @@ packages:
       jest-validate: 29.5.0
       jest-watcher: 29.5.0
       micromatch: 4.0.5
-      pretty-format: 29.5.0
+      pretty-format: 29.7.0
       slash: 3.0.0
       strip-ansi: 6.0.1
     transitivePeerDependencies:
@@ -15517,7 +15517,6 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@sinclair/typebox': 0.27.8
-    dev: true
 
   /@jest/source-map@27.5.1:
     resolution: {integrity: sha512-y9NIHUYF3PJRlHk98NdC/N1gl88BL08aQQgu4k4ZopQkCw9t9cV8mtl3TV8b/YCB8XaVTFrmUTAJvjsntDireg==}
@@ -17345,6 +17344,15 @@ packages:
       '@floating-ui/dom': 0.1.10
       vue: 3.2.47
       vue-resize: 2.0.0-alpha.1(vue@3.2.47)
+    dev: false
+
+  /@novu/stateless@0.22.0:
+    resolution: {integrity: sha512-QEzNQeQ649lBmW91OQFK3K+vDVTlIgDmfHpjFxYcbf+60ZpKqhqJha32G7cjAmjMtmD/RWJUiZS2aEdnX4v2yw==}
+    engines: {node: '>=10'}
+    dependencies:
+      handlebars: 4.7.7
+      lodash.get: 4.4.2
+      lodash.merge: 4.6.2
     dev: false
 
   /@npmcli/arborist@5.3.0:
@@ -22241,7 +22249,6 @@ packages:
 
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
-    dev: true
 
   /@sinonjs/commons@1.8.6:
     resolution: {integrity: sha512-Ky+XkAkqPZSm3NLBeUng77EBQl3cmeJhITaGHdYH8kjVB+aun3S4XBRti2zt17mtt0mIUDiNxYeoJm6drVvBJQ==}
@@ -27019,6 +27026,13 @@ packages:
       expect: 29.5.0
       pretty-format: 29.5.0
 
+  /@types/jest@29.5.12:
+    resolution: {integrity: sha512-eDC8bTvT/QhYdxJAulQikueigY5AsdBRH2yDKW3yveW7svY3+DzN84/2NUgkw10RTiJbWqZrTtoGVdYlvFJdLw==}
+    dependencies:
+      expect: 29.5.0
+      pretty-format: 29.7.0
+    dev: true
+
   /@types/jest@29.5.2:
     resolution: {integrity: sha512-mSoZVJF5YzGVCk+FsDxzDuH7s+SCkzrgKZzf0Z0T2WudhBUPoF6ktoTPC4R0ZoCPCV5xUvuU6ias5NvxcBcMMg==}
     dependencies:
@@ -27544,7 +27558,7 @@ packages:
   /@types/testing-library__jest-dom@5.14.5:
     resolution: {integrity: sha512-SBwbxYoyPIvxHbeHxTZX2Pe/74F/tX2/D3mMvzabdeJ25bBojfW0TyB8BHrbq/9zaaKICJZjLP+8r6AeZMFCuQ==}
     dependencies:
-      '@types/jest': 29.5.2
+      '@types/jest': 29.5.12
     dev: true
 
   /@types/through@0.0.30:
@@ -33854,14 +33868,9 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dev: true
 
-  /diff-sequences@29.4.3:
-    resolution: {integrity: sha512-ofrBgwpPhCD85kMKtE9RYFFq6OC1A89oW2vvgWZNCwxrUpRUILopY7lsYyMDSjc8g6U6aiO0Qubg6r4Wgt5ZnA==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-
   /diff-sequences@29.6.3:
     resolution: {integrity: sha512-EjePK1srD3P08o2j4f0ExnylqRs5B9tJjcp9t1krH2qRi8CCdsYfwe9JgSLurFBWwq4uOlipzfk5fHNvwFKr8Q==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dev: true
 
   /diff@4.0.2:
     resolution: {integrity: sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==}
@@ -35005,7 +35014,7 @@ packages:
       damerau-levenshtein: 1.0.8
       emoji-regex: 9.2.2
       eslint: 8.51.0
-      has: 1.0.4
+      has: 1.0.3
       jsx-ast-utils: 3.3.3
       language-tags: 1.0.5
       minimatch: 3.1.2
@@ -39345,7 +39354,7 @@ packages:
       jest-snapshot: 29.5.0
       jest-util: 29.5.0
       p-limit: 3.1.0
-      pretty-format: 29.5.0
+      pretty-format: 29.7.0
       pure-rand: 6.0.1
       slash: 3.0.0
       stack-utils: 2.0.6
@@ -39512,7 +39521,7 @@ packages:
       jest-validate: 29.5.0
       micromatch: 4.0.5
       parse-json: 5.2.0
-      pretty-format: 29.5.0
+      pretty-format: 29.7.0
       slash: 3.0.0
       strip-json-comments: 3.1.1
       ts-node: 10.9.1(@types/node@16.11.7)(typescript@4.9.5)
@@ -39552,7 +39561,7 @@ packages:
       jest-validate: 29.5.0
       micromatch: 4.0.5
       parse-json: 5.2.0
-      pretty-format: 29.5.0
+      pretty-format: 29.7.0
       slash: 3.0.0
       strip-json-comments: 3.1.1
       ts-node: 10.9.1(@types/node@16.11.7)(typescript@4.9.5)
@@ -39592,7 +39601,7 @@ packages:
       jest-validate: 29.5.0
       micromatch: 4.0.5
       parse-json: 5.2.0
-      pretty-format: 29.5.0
+      pretty-format: 29.7.0
       slash: 3.0.0
       strip-json-comments: 3.1.1
       ts-node: 10.9.1(@types/node@16.11.7)(typescript@4.9.5)
@@ -39625,9 +39634,9 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       chalk: 4.1.2
-      diff-sequences: 29.4.3
+      diff-sequences: 29.6.3
       jest-get-type: 29.4.3
-      pretty-format: 29.5.0
+      pretty-format: 29.7.0
 
   /jest-docblock@27.5.1:
     resolution: {integrity: sha512-rl7hlABeTsRYxKiUfpHrQrG4e2obOiTQWfMEH3PxPjOtdsfLQO4ReWSZaQ7DETm4xu07rl4q/h4zcKXyU0/OzQ==}
@@ -39662,7 +39671,7 @@ packages:
       chalk: 4.1.2
       jest-get-type: 29.4.3
       jest-util: 29.5.0
-      pretty-format: 29.5.0
+      pretty-format: 29.7.0
     dev: true
 
   /jest-environment-jsdom@27.5.1:
@@ -39829,7 +39838,7 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       jest-get-type: 29.4.3
-      pretty-format: 29.5.0
+      pretty-format: 29.7.0
     dev: true
 
   /jest-matcher-utils@24.9.0:
@@ -39859,7 +39868,7 @@ packages:
       chalk: 4.1.2
       jest-diff: 29.5.0
       jest-get-type: 29.4.3
-      pretty-format: 29.5.0
+      pretty-format: 29.7.0
 
   /jest-message-util@27.5.1:
     resolution: {integrity: sha512-rMyFe1+jnyAAf+NHwTclDz0eAaLkVDdKVHHBFWsBWHnnh5YeJMNWWsv7AbFYXfK3oTqvL7VTWkhNLu1jX24D+g==}
@@ -39901,7 +39910,7 @@ packages:
       chalk: 4.1.2
       graceful-fs: 4.2.11
       micromatch: 4.0.5
-      pretty-format: 29.5.0
+      pretty-format: 29.7.0
       slash: 3.0.0
       stack-utils: 2.0.6
 
@@ -40200,7 +40209,7 @@ packages:
       jest-message-util: 29.5.0
       jest-util: 29.5.0
       natural-compare: 1.4.0
-      pretty-format: 29.5.0
+      pretty-format: 29.7.0
       semver: 7.5.4
     transitivePeerDependencies:
       - supports-color
@@ -40266,7 +40275,7 @@ packages:
       chalk: 4.1.2
       jest-get-type: 29.4.3
       leven: 3.1.0
-      pretty-format: 29.5.0
+      pretty-format: 29.7.0
     dev: true
 
   /jest-watch-typeahead@1.1.0(jest@27.5.1):
@@ -46695,7 +46704,6 @@ packages:
       '@jest/schemas': 29.6.3
       ansi-styles: 5.2.0
       react-is: 18.2.0
-    dev: true
 
   /pretty-hrtime@1.0.3:
     resolution: {integrity: sha512-66hKPCr+72mlfiSjlEB1+45IjXSqvVAIy6mocupoww4tBFE9R9IhwwUGoI4G++Tc9Aq+2rxOt0RFU6gPcrte0A==}
@@ -52140,6 +52148,41 @@ packages:
     dependencies:
       '@babel/core': 7.23.2
       '@types/jest': 29.5.1
+      bs-logger: 0.2.6
+      fast-json-stable-stringify: 2.1.0
+      jest: 27.5.1(ts-node@10.9.1)
+      jest-util: 27.5.1
+      json5: 2.2.3
+      lodash.memoize: 4.1.2
+      make-error: 1.3.6
+      semver: 7.5.4
+      typescript: 4.9.5
+      yargs-parser: 20.2.9
+    dev: true
+
+  /ts-jest@27.1.5(@babel/core@7.23.2)(@types/jest@29.5.12)(jest@27.5.1)(typescript@4.9.5):
+    resolution: {integrity: sha512-Xv6jBQPoBEvBq/5i2TeSG9tt/nqkbpcurrEG1b+2yfBrcJelOZF9Ml6dmyMh7bcW9JyFbRYpR5rxROSlBLTZHA==}
+    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
+    hasBin: true
+    peerDependencies:
+      '@babel/core': '>=7.0.0-beta.0 <8'
+      '@types/jest': ^27.0.0
+      babel-jest: '>=27.0.0 <28'
+      esbuild: '*'
+      jest: ^27.0.0
+      typescript: '>=3.8 <5.0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@types/jest':
+        optional: true
+      babel-jest:
+        optional: true
+      esbuild:
+        optional: true
+    dependencies:
+      '@babel/core': 7.23.2
+      '@types/jest': 29.5.12
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
       jest: 27.5.1(ts-node@10.9.1)
