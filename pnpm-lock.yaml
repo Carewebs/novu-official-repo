@@ -2143,6 +2143,9 @@ importers:
       eslint-plugin-storybook:
         specifier: ^0.6.13
         version: 0.6.13(eslint@8.51.0)(typescript@4.9.5)
+      glob:
+        specifier: ^10.3.10
+        version: 10.3.10
       react:
         specifier: ^17.0.1
         version: 17.0.2
@@ -35447,7 +35450,7 @@ packages:
     engines: {node: '>=14'}
     dependencies:
       cross-spawn: 7.0.3
-      signal-exit: 4.0.2
+      signal-exit: 4.1.0
 
   /forever-agent@0.6.1:
     resolution: {integrity: sha512-j0KLYPhm6zeac4lz3oJ3o65qvgQCcPubiyotZrXqEaG4hNagNYO8qdlUrX5vwqv9ohqeT/Z3j6+yW067yWWdUw==}
@@ -36231,7 +36234,7 @@ packages:
       fs.realpath: 1.0.0
       minimatch: 8.0.4
       minipass: 4.2.7
-      path-scurry: 1.6.4
+      path-scurry: 1.10.1
     dev: true
 
   /global-dirs@0.1.1:
@@ -40957,11 +40960,6 @@ packages:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
 
-  /lru-cache@9.0.1:
-    resolution: {integrity: sha512-C8QsKIN1UIXeOs3iWmiZ1lQY+EnKDojWd37fXy1aSbJvH4iSma1uy2OWuoB3m4SYRli5+CUjDv3Dij5DVoetmg==}
-    engines: {node: 14 || >=16.14}
-    dev: true
-
   /lru-memoizer@2.2.0:
     resolution: {integrity: sha512-QfOZ6jNkxCcM/BkIPnFsqDhtrazLRsghi9mBwFAzol5GCvj4EkFT899Za3+QwikCg5sRX8JstioBDwOxEyzaNw==}
     dependencies:
@@ -42103,6 +42101,7 @@ packages:
   /minipass@5.0.0:
     resolution: {integrity: sha512-3FnjYuehv9k6ovOEbyOswadCDPX1piCfhV8ncmYtHOjuPwylVWsghTLo7rabjC3Rx5xD4HDx8Wm1xnMF7S5qFQ==}
     engines: {node: '>=8'}
+    dev: true
 
   /minipass@7.0.4:
     resolution: {integrity: sha512-jYofLM5Dam9279rdkWzqHozUo4ybjdZmCsDHePy5V/PbBcVMiSZR97gmAy45aqi8CK1lG2ECd356FU86avfwUQ==}
@@ -44499,15 +44498,7 @@ packages:
     engines: {node: '>=16 || 14 >=14.17'}
     dependencies:
       lru-cache: 10.0.1
-      minipass: 5.0.0
-
-  /path-scurry@1.6.4:
-    resolution: {integrity: sha512-Qp/9IHkdNiXJ3/Kon++At2nVpnhRiPq/aSvQN+H3U1WZbvNRK0RIQK/o4HMqPoXjpuGJUEWpHSs6Mnjxqh3TQg==}
-    engines: {node: '>=16 || 14 >=14.17'}
-    dependencies:
-      lru-cache: 9.0.1
-      minipass: 5.0.0
-    dev: true
+      minipass: 7.0.4
 
   /path-temp@2.0.0:
     resolution: {integrity: sha512-92olbatybjsHTGB2CUnAM7s0mU/27gcMfLNA7t09UftndUdxywlQKur3fzXEPpfLrgZD3I2Bt8+UmiL7YDEgXQ==}
@@ -49159,14 +49150,9 @@ packages:
   /signal-exit@3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
 
-  /signal-exit@4.0.2:
-    resolution: {integrity: sha512-MY2/qGx4enyjprQnFaZsHib3Yadh3IXyV2C321GY0pjGfVBu4un0uDJkwgdxqO+Rdx8JMT8IfJIRwbYVz3Ob3Q==}
-    engines: {node: '>=14'}
-
   /signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
-    dev: true
 
   /signale@1.4.0:
     resolution: {integrity: sha512-iuh+gPf28RkltuJC7W5MRi6XAjTDCAPC/prJUpQoG4vIP3MJZ+GTydVnodXA7pwvTKb2cA0m9OFZW/cdWy/I/w==}
@@ -53949,7 +53935,7 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
       imurmurhash: 0.1.4
-      signal-exit: 4.0.2
+      signal-exit: 4.1.0
     dev: true
 
   /write-json-file@3.2.0:
