@@ -14,7 +14,6 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     timeout-minutes: 80
-    environment: Production
     outputs:
       docker_image: ${{ steps.build-image.outputs.IMAGE }}
     steps:
@@ -45,22 +44,23 @@ jobs:
           service="novu/ws-ee"
           echo "SERVICE_NAME=$(basename "${service//-/-}")" >> $GITHUB_ENV
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+          token_format: 'access_token'
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+      - name: Login to GCR
+        shell: bash
+        run: |-
+          echo '${{ steps.auth.outputs.access_token }}' | docker login -u oauth2accesstoken --password-stdin https://${{vars.REGISTRY_URL}}
 
-      - name: Build, tag, and push image to Amazon ECR
+      - name: Build, tag, and push image to GCP Artifact
         id: build-image
         env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: novu/ws
+          REGISTRY: ${{ vars.REGISTRY_URL }}/${{ secrets.GCP_PROJECT_ID }}
+          REPOSITORY: ${{ secrets.REPOSITORY }}/novu/ws
           IMAGE_TAG: ${{ github.sha }}
           DOCKER_BUILD_ARGUMENTS: >
             --platform=linux/amd64
@@ -83,22 +83,8 @@ jobs:
     uses: ./.github/workflows/reusable-app-service-deploy.yml
     secrets: inherit
     with:
-      environment: Production
       service_name: ws
       terraform_workspace: novu-prod-eu
-      docker_image: ${{ needs.build_prod_image.outputs.docker_image }}
-      deploy_sentry_release: true
-      sentry_project: ws
-
-  deploy_prod_ws_us:
-    needs:
-      - build_prod_image
-    uses: ./.github/workflows/reusable-app-service-deploy.yml
-    secrets: inherit
-    with:
-      environment: Production
-      service_name: ws
-      terraform_workspace: novu-prod
       docker_image: ${{ needs.build_prod_image.outputs.docker_image }}
       deploy_sentry_release: true
       sentry_project: ws

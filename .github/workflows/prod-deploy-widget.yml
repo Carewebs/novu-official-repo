@@ -19,7 +19,6 @@ jobs:
     needs: test_widget
     uses: ./.github/workflows/reusable-widget-deploy.yml
     with:
-      environment: Production
       react_app_api_url: https://eu.api.novu.co
       react_app_ws_url: https://eu.ws.novu.co
       react_app_webhook_url: https://eu.webhook.novu.co
@@ -37,7 +36,6 @@ jobs:
       - deploy_widget_eu
     uses: ./.github/workflows/reusable-widget-deploy.yml
     with:
-      environment: Production
       react_app_api_url: https://api.novu.co
       react_app_ws_url: https://ws.novu.co
       react_app_webhook_url: https://webhook.novu.co
@@ -55,7 +53,6 @@ jobs:
       - deploy_widget_eu
     uses: ./.github/workflows/reusable-docker.yml
     with:
-      environment: Production
       package_name: novu/widget
       project_path: apps/widget
       local_tag: novu-widget

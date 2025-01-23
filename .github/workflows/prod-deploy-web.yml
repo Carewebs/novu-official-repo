@@ -13,7 +13,6 @@ jobs:
   deploy_web_eu:
     uses: ./.github/workflows/reusable-web-deploy.yml
     with:
-      environment: Production
       react_app_api_url: https://eu.api.novu.co
       react_app_ws_url: https://eu.ws.novu.co
       react_app_webhook_url: https://eu.webhook.novu.co
@@ -34,7 +33,6 @@ jobs:
   deploy_web_us:
     uses: ./.github/workflows/reusable-web-deploy.yml
     with:
-      environment: Production
       react_app_api_url: https://api.novu.co
       react_app_ws_url: https://ws.novu.co
       react_app_webhook_url: https://webhook.novu.co
