@@ -72,19 +72,3 @@ jobs:
 
       - name: Build
         run: CI='' pnpm build:widget
-
-      - name: Deploy Widget
-        uses: scopsy/actions-netlify@develop
-        with:
-          publish-dir: apps/widget/build
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: ${{ inputs.netlify_deploy_message }}
-          production-deploy: true
-          alias: ${{ inputs.netlify_alias }}
-          github-deployment-environment: ${{ inputs.netlify_gh_env }}
-          github-deployment-description: Widget Deployment
-          netlify-config-path: apps/widget/netlify.toml
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ inputs.netlify_site_id }}
-        timeout-minutes: 1

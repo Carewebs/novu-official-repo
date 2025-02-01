@@ -38,10 +38,6 @@ on:
       env_tag:
         required: false
         type: string
-      aws-region:
-        description: 'Region for AWS'
-        required: true
-        type: string
 
     outputs:
       docker_image:
@@ -102,13 +98,11 @@ jobs:
         run: |-
           echo '${{ steps.auth.outputs.access_token }}' | docker login -u oauth2accesstoken --password-stdin https://${{vars.REGISTRY_URL}}
 
-      - name: Build, tag, and push image to ECR
+      - name: Build, tag, and push image to GCP Artifact
         id: build-image
-        if: ${{ inputs.env_tag == 'dev' || inputs.env_tag == 'stg' }}
         env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: ${{ inputs.package_name }}
-          DOCKER_NAME: ${{ matrix.name }}
+          REGISTRY: ${{ vars.REGISTRY_URL }}/${{ secrets.GCP_PROJECT_ID }}
+          REPOSITORY: ${{ secrets.REPOSITORY }}/${{inputs.package_name}}
           LOCAL_TAG: ${{ inputs.local_tag }}
           IMAGE_TAG: ${{ github.sha }}
           ENV_TAG: ${{ inputs.env_tag }}

@@ -83,11 +83,3 @@ jobs:
           docker push $REGISTRY/$REPOSITORY:latest
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
           echo "IMAGE=$REGISTRY/$REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
-
-  deploy_prod_workers_eu:
-    needs: build_prod_image
-    uses: ./.github/workflows/reusable-workers-service-deploy.yml
-    secrets: inherit
-    with:
-      terraform_workspace: novu-prod-eu
-      docker_image: ${{ needs.build_prod_image.outputs.docker_image }}

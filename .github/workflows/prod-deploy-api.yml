@@ -1,8 +1,5 @@
 name: Deploy PROD API
 
-env:
-  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
-
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
@@ -43,11 +40,6 @@ jobs:
           service="novu/api-ee"
           echo "SERVICE_NAME=$(basename "${service//-/-}")" >> $GITHUB_ENV
 
-      - name: Set Bull MQ Env variable for EE
-        shell: bash
-        run: |
-          echo "BULL_MQ_PRO_NPM_TOKEN=${{ secrets.BULL_MQ_PRO_NPM_TOKEN }}" >> $GITHUB_ENV
-
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
@@ -84,11 +76,11 @@ jobs:
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
           echo "IMAGE=$REGISTRY/$REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
-  deploy_prod_api_eu:
-    needs: build_prod_image
-    uses: ./.github/workflows/reusable-app-service-deploy.yml
-    secrets: inherit
-    with:
-      service_name: api
-      terraform_workspace: novu-prod-eu
-      docker_image: ${{ needs.build_prod_image.outputs.docker_image }}
+  # deploy_prod_api_eu:
+  #   needs: build_prod_image
+  #   uses: ./.github/workflows/reusable-app-service-deploy.yml
+  #   secrets: inherit
+  #   with:
+  #     service_name: api
+  #     terraform_workspace: novu-prod-eu
+  #     docker_image: ${{ needs.build_prod_image.outputs.docker_image }}

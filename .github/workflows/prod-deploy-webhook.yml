@@ -22,22 +22,12 @@ jobs:
 
     secrets: inherit
 
-  deploy_prod_webhook_eu:
-    needs:
-      - publish_docker_image_webhook
-    uses: ./.github/workflows/reusable-app-service-deploy.yml
-    secrets: inherit
-    with:
-      service_name: webhook
-      terraform_workspace: novu-prod-eu
-      docker_image: ${{ needs.publish_docker_image_webhook.outputs.docker_image_ee }}
-
-  deploy_prod_webhook_us:
-    needs:
-      - publish_docker_image_webhook
-    uses: ./.github/workflows/reusable-app-service-deploy.yml
-    secrets: inherit
-    with:
-      service_name: webhook
-      terraform_workspace: novu-prod
-      docker_image: ${{ needs.publish_docker_image_webhook.outputs.docker_image_ee }}
+  # deploy_prod_webhook_eu:
+  #   needs:
+  #     - publish_docker_image_webhook
+  #   uses: ./.github/workflows/reusable-app-service-deploy.yml
+  #   secrets: inherit
+  #   with:
+  #     service_name: webhook
+  #     terraform_workspace: novu-prod-eu
+  #     docker_image: ${{ needs.publish_docker_image_webhook.outputs.docker_image_ee }}

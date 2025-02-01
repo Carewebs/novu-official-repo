@@ -110,18 +110,3 @@ jobs:
       - name: Build
         run: CI='' pnpm build:web --skip-nx-cache
 
-      - name: Deploy WEB
-        uses: nwtgck/actions-netlify@v1.2
-        with:
-          publish-dir: apps/web/build
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: ${{ inputs.netlify_deploy_message }}
-          production-deploy: true
-          alias: ${{ inputs.netlify_alias }}
-          github-deployment-environment: ${{ inputs.netlify_gh_env }}
-          github-deployment-description: Web Deployment
-          netlify-config-path: apps/web/netlify.toml
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ inputs.netlify_site_id }}
-        timeout-minutes: 1
