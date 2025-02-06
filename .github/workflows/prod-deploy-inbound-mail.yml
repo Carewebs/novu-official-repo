@@ -21,7 +21,6 @@ jobs:
   build_prod_image:
     runs-on: ubuntu-latest
     timeout-minutes: 80
-    environment: Production
     outputs:
       docker_image: ${{ steps.build-image.outputs.IMAGE }}
     permissions:
@@ -98,26 +97,12 @@ jobs:
           docker push ghcr.io/$REGISTRY_OWNER/$DOCKER_NAME:$IMAGE_TAG
           echo "IMAGE=ghcr.io/$REGISTRY_OWNER/$DOCKER_NAME:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
-  deploy_prod_inbound_mail_eu:
-    needs:
-      - build_prod_image
-    uses: ./.github/workflows/reusable-app-service-deploy.yml
-    secrets: inherit
-    with:
-      environment: Production
-      service_name: inbound_mail
-      terraform_workspace: novu-prod-eu
-      docker_image: ghcr.io/novuhq/novu/inbound-mail-ee:${{ github.sha }}
-
-  deploy_prod_inbound_mail_us:
-    needs:
-      - build_prod_image
-    uses: ./.github/workflows/reusable-app-service-deploy.yml
-    secrets: inherit
-    with:
-      environment: Production
-      service_name: inbound_mail
-      terraform_workspace: novu-prod
-      docker_image: ghcr.io/novuhq/novu/inbound-mail-ee:${{ github.sha }}
-      deploy_sentry_release: true
-      sentry_project: inbound-mail
+  # deploy_prod_inbound_mail_eu:
+  #   needs:
+  #     - build_prod_image
+  #   uses: ./.github/workflows/reusable-app-service-deploy.yml
+  #   secrets: inherit
+  #   with:
+  #     service_name: inbound_mail
+  #     terraform_workspace: novu-prod-eu
+  #     docker_image: ghcr.io/novuhq/novu/inbound-mail-ee:${{ github.sha }}

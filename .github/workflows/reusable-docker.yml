@@ -38,10 +38,6 @@ on:
       env_tag:
         required: false
         type: string
-      aws-region:
-        description: 'Region for AWS'
-        required: true
-        type: string
 
     outputs:
       docker_image:
@@ -90,24 +86,23 @@ jobs:
         with:
           driver-opts: 'image=moby/buildkit:v0.13.1'
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ inputs.aws-region }}
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+          token_format: 'access_token'
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+      - name: Login to GCR
+        shell: bash
+        run: |-
+          echo '${{ steps.auth.outputs.access_token }}' | docker login -u oauth2accesstoken --password-stdin https://${{vars.REGISTRY_URL}}
 
-      - name: Build, tag, and push image to ECR
+      - name: Build, tag, and push image to GCP Artifact
         id: build-image
-        if: ${{ inputs.env_tag == 'dev' || inputs.env_tag == 'stg' }}
         env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: ${{ inputs.package_name }}
-          DOCKER_NAME: ${{ matrix.name }}
+          REGISTRY: ${{ vars.REGISTRY_URL }}/${{ secrets.GCP_PROJECT_ID }}
+          REPOSITORY: ${{ secrets.REPOSITORY }}/${{inputs.package_name}}
           LOCAL_TAG: ${{ inputs.local_tag }}
           IMAGE_TAG: ${{ github.sha }}
           ENV_TAG: ${{ inputs.env_tag }}

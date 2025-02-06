@@ -3,9 +3,6 @@ name: Deploy PROD Notification Center Web Component
 on:
   workflow_dispatch:
 
-env:
-  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
-
 jobs:
   build:
     uses: ./.github/workflows/reusable-notification-center.yml
@@ -15,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 80
     if: "!contains(github.event.head_commit.message, 'ci skip')"
-    environment: Production
 
     steps:
       - uses: actions/checkout@v4

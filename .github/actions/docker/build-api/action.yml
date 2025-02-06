@@ -46,16 +46,17 @@ runs:
         service=${{ matrix.name }}
         echo "SERVICE_NAME=$(basename "${service//-/-}")" >> $GITHUB_ENV
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
       with:
-        aws-access-key-id: ${{ inputs.aws-access-key-id }}
-        aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
-        aws-region: eu-west-2
+        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+        token_format: 'access_token'
 
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v2
+    - name: Login to GCR
+      shell: bash
+      run: |-
+        echo '${{ steps.auth.outputs.access_token }}' | docker login -u oauth2accesstoken --password-stdin https://${{vars.REGISTRY_URL}}
 
     - name: Set Bull MQ Env variable for EE
       shell: bash
@@ -66,8 +67,8 @@ runs:
     - name: Build with Buildx, tag, and test
       shell: bash
       env:
-        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        REPOSITORY: novu-dev/api
+        REGISTRY: ${{ vars.REGISTRY_URL }}/${{ secrets.GCP_PROJECT_ID }}
+        REPOSITORY: ${{ secrets.REPOSITORY }}
         IMAGE_TAG: ${{ github.sha }}
         DOCKER_BUILD_ARGUMENTS: >
           --platform=linux/amd64 --provenance=false
@@ -81,8 +82,8 @@ runs:
       id: build-image
       shell: bash
       env:
-        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        REPOSITORY: novu-dev/api
+        REGISTRY: ${{ vars.REGISTRY_URL }}/${{ secrets.GCP_PROJECT_ID }}
+        REPOSITORY: novu/api
         IMAGE_TAG: ${{ github.sha }}
       run: |
         echo "Built image"
@@ -97,8 +98,8 @@ runs:
       if: ${{ inputs.tag }}
       shell: bash
       env:
-        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        REPOSITORY: novu-dev/api
+        REGISTRY: ${{ vars.REGISTRY_URL }}/${{ secrets.GCP_PROJECT_ID }}
+        REPOSITORY: novu/api
         IMAGE_TAG: ${{ github.sha }}
       run: |
         docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:${{ inputs.tag }}
@@ -107,8 +108,8 @@ runs:
       if: ${{ inputs.push == 'true' }}
       shell: bash
       env:
-        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        REPOSITORY: novu-dev/api
+        REGISTRY: ${{ vars.REGISTRY_URL }}/${{ secrets.GCP_PROJECT_ID }}
+        REPOSITORY: novu/api
         IMAGE_TAG: ${{ github.sha }}
       run: |
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
@@ -117,7 +118,7 @@ runs:
       if: ${{ inputs.push == 'true' && inputs.tag }}
       shell: bash
       env:
-        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        REPOSITORY: novu-dev/api
+        REGISTRY: ${{ vars.REGISTRY_URL }}/${{ secrets.GCP_PROJECT_ID }}
+        REPOSITORY: novu/api
       run: |
         docker push $REGISTRY/$REPOSITORY:${{ inputs.tag }}
