@@ -70,7 +70,6 @@
     "start:ws:test": "cross-env nx run-many --target=start:test --projects=@novu/ws",
     "start:ws": "cross-env nx run @novu/ws:start",
     "start": "npm run jarvis",
-    "symlink:submodules": "pnpm --filter \"@novu/ee-*\" exec node \"$(pwd)/scripts/symlink-ee.mjs\"",
     "test:providers": "cross-env pnpm --filter './packages/providers/**' test",
     "test": "cross-env CI=true lerna run test:watch --parallel"
   },

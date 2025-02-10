@@ -68,14 +68,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         name: Checkout with submodules
-        with:
-          submodules: true
-          token: ${{ secrets.SUBMODULES_TOKEN }}
+
 
       - uses: ./.github/actions/setup-project
         with:
           slim: 'true'
-          submodules: true
+          submodules: false
 
       - name: Create env file in the legacy Web app
         working-directory: apps/web

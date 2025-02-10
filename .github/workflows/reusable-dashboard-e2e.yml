@@ -55,9 +55,7 @@ jobs:
         name: Checkout enterprise code from the submodule
         uses: actions/checkout@v4
         if: steps.determine_run_type.outputs.enterprise_run == 'true'
-        with:
-          submodules: true
-          token: ${{ secrets.SUBMODULES_TOKEN }}
+
 
       - id: checkout-community-code
         name: Checkout community code
@@ -66,7 +64,7 @@ jobs:
 
       - uses: ./.github/actions/setup-project
         with:
-          submodules: true
+          submodules: false
 
       - uses: mansagroup/nrwl-nx-action@v3
         with:

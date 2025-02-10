@@ -18,12 +18,10 @@ jobs:
       docker_image: ${{ steps.build-image.outputs.IMAGE }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
-          token: ${{ secrets.SUBMODULES_TOKEN }}
+
       - uses: ./.github/actions/setup-project
         with:
-          submodules: true
+          submodules: false
 
       - name: Set Bull MQ Env variable for EE
         shell: bash

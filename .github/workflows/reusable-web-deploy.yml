@@ -71,14 +71,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         name: Checkout with submodules
-        with:
-          submodules: true
-          token: ${{ secrets.SUBMODULES_TOKEN }}
+
 
       - uses: ./.github/actions/setup-project
         with:
           slim: 'true'
-          submodules: true
+          submodules: false
 
       - name: Create env file
         working-directory: apps/web
@@ -109,4 +107,3 @@ jobs:
 
       - name: Build
         run: CI='' pnpm build:web --skip-nx-cache
-
