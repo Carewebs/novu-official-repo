@@ -22,12 +22,10 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
-          token: ${{ secrets.SUBMODULES_TOKEN }}
+
       - uses: ./.github/actions/setup-project
         with:
-          submodules: true
+          submodules: false
 
       - name: build worker
         run: pnpm build:worker --skip-nx-cache
