@@ -1,4 +1,4 @@
-name: Test WEB
+name: Test DASHBOARD
 
 env:
   NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
@@ -23,7 +23,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  e2e_web:
+  e2e_dashboard:
     strategy:
       fail-fast: false
       matrix:
@@ -69,7 +69,7 @@ jobs:
       - uses: mansagroup/nrwl-nx-action@v3
         with:
           targets: build
-          projects: '@novu/web,@novu/api-service,@novu/worker'
+          projects: '@novu/dashboard,@novu/api-service,@novu/worker'
           args: --skip-nx-cache
 
       - uses: ./.github/actions/start-localstack
@@ -86,8 +86,8 @@ jobs:
         run: |
           cd apps/ws && pnpm start:test &
 
-      - name: Start Novu web app
-        working-directory: apps/web
+      - name: Start Novu Dashboard
+        working-directory: apps/dashboard
         env:
           REACT_APP_API_URL: http://127.0.0.1:1336
           REACT_APP_WS_URL: http://127.0.0.1:1340
@@ -95,19 +95,17 @@ jobs:
           # Disable LaunchDarkly client-side SDK in the test environment to reduce E2E flakiness
           REACT_APP_LAUNCH_DARKLY_CLIENT_SIDE_ID: ''
           NOVU_ENTERPRISE: ${{ steps.determine_run_type.outputs.enterprise_run }}
-        run: |
-          pnpm run envsetup:docker
-          pnpm start:static:build &
+        run: pnpm start:static:build &
 
       - name: Wait on Services
-        run: wait-on --timeout=180000 http://127.0.0.1:1340/v1/health-check http://127.0.0.1:4200/
+        run: wait-on --timeout=180000 http://127.0.0.1:1340/v1/health-check http://127.0.0.1:4201/
 
       - name: Install Playwright
-        working-directory: apps/web
+        working-directory: apps/dashboard
         run: pnpm test:e2e:install
 
       - name: Run E2E tests
-        working-directory: apps/web
+        working-directory: apps/dashboard
         env:
           NOVU_ENTERPRISE: ${{ steps.determine_run_type.outputs.enterprise_run }}
         run: pnpm test:e2e --shard=${{ matrix.containers }}/${{ matrix.total }}
@@ -115,14 +113,14 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-          name: blob-report-${{ matrix.containers }}
-          path: apps/web/blob-report
+          name: dashboard-blob-report-${{ matrix.containers }}
+          path: apps/dashboard/blob-report
           retention-days: 1
 
   merge-reports:
     # Merge reports after playwright-tests, even if some shards have failed
     if: ${{ !cancelled() }}
-    needs: [e2e_web]
+    needs: [e2e_dashboard]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -133,17 +131,17 @@ jobs:
       - name: Download blob reports from GitHub Actions Artifacts
         uses: actions/download-artifact@v4
         with:
-          path: all-blob-reports
-          pattern: blob-report-*
+          path: dashboard-all-blob-reports
+          pattern: dashboard-blob-report-*
           merge-multiple: true
 
       - name: Merge into HTML Report
-        run: npx playwright merge-reports --reporter html ./all-blob-reports
+        run: npx playwright merge-reports --reporter html ./dashboard-all-blob-reports
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4
         with:
-          name: html-report--attempt-${{ github.run_attempt }}
+          name: dashboard-html-report--attempt-${{ github.run_attempt }}
           path: playwright-report
           retention-days: 14
 

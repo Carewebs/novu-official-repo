@@ -1,4 +1,4 @@
-name: Deploy Web to Netlify
+name: Deploy Dashboard to Netlify
 
 env:
   NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
@@ -53,9 +53,6 @@ on:
       clerk_is_ee_auth_enabled:
         required: true
         type: string
-      new_dashboard_url:
-        required: false
-        type: string
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -78,7 +75,7 @@ jobs:
           slim: 'true'
           submodules: false
 
-      - name: Create env file
+      - name: Create env file in the legacy Web app
         working-directory: apps/web
         run: |
           touch .env
@@ -99,11 +96,22 @@ jobs:
           echo REACT_APP_MIXPANEL_KEY=${{ secrets.MIXPANEL_TOKEN }} >> .env
           echo REACT_APP_CLERK_PUBLISHABLE_KEY=${{ inputs.clerk_publishable_key }} >> .env
           echo REACT_APP_IS_EE_AUTH_ENABLED=${{ inputs.clerk_is_ee_auth_enabled }} >> .env
-          echo REACT_APP_NEW_DASHBOARD_URL=${{ inputs.new_dashboard_url }} >> .env
-          echo REACT_APP_PLAIN_SUPPORT_CHAT_APP_ID=${{secrets.REACT_APP_PLAIN_SUPPORT_CHAT_APP_ID}} >> .env
-      - name: Envsetup
-        working-directory: apps/web
-        run: npm run envsetup
 
       - name: Build
-        run: CI='' pnpm build:web --skip-nx-cache
+        run: CI='' pnpm build:dashboard --skip-nx-cache
+
+      - name: Deploy Dashboard to Netlify
+        uses: nwtgck/actions-netlify@v1.2
+        with:
+          publish-dir: apps/dashboard/dist
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: ${{ inputs.netlify_deploy_message }}
+          production-deploy: true
+          alias: ${{ inputs.netlify_alias }}
+          github-deployment-environment: ${{ inputs.netlify_gh_env }}
+          github-deployment-description: Dashboard Deployment
+          netlify-config-path: apps/dashboard/netlify.toml
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ inputs.netlify_site_id }}
+        timeout-minutes: 1

@@ -10,8 +10,11 @@ inputs:
     description: 'Push the image to the registry'
     required: false
     default: 'false'
-  github_token:
-    description: 'The token to use for logging into ghcr.io'
+  aws-access-key-id:
+    description: 'Access Key for AWS'
+    required: true
+  aws-secret-access-key:
+    description: 'Secret Access Key for AWS'
     required: true
   fork:
     description: 'Whether this is being triggered from a forked repo'
@@ -20,7 +23,6 @@ inputs:
   docker_name:
     description: 'Name for docker image'
     required: true
-
   bullmq_secret:
     description: 'Bullmq secret api token'
     required: true
@@ -33,20 +35,28 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: ⛏️ build api
-      shell: bash
-      run: pnpm build:api
+    - name: Set Up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      with:
+        driver-opts: 'image=moby/buildkit:v0.13.1'
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-
-    - name: Login To Registry
+    - name: Prepare
       shell: bash
-      env:
-        GH_ACTOR: ${{ github.actor }}
-        GH_PASSWORD: ${{ inputs.github_token }}
       run: |
-        echo $GH_PASSWORD | docker login ghcr.io -u $GH_ACTOR --password-stdin
+        service=${{ matrix.name }}
+        echo "SERVICE_NAME=$(basename "${service//-/-}")" >> $GITHUB_ENV
+
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+        token_format: 'access_token'
+
+    - name: Login to GCR
+      shell: bash
+      run: |-
+        echo '${{ steps.auth.outputs.access_token }}' | docker login -u oauth2accesstoken --password-stdin https://${{vars.REGISTRY_URL}}
 
     - name: Set Bull MQ Env variable for EE
       shell: bash
@@ -57,58 +67,58 @@ runs:
     - name: Build with Buildx, tag, and test
       shell: bash
       env:
-        REGISTRY_OWNER: novuhq
-        DOCKER_NAME: ${{ inputs.docker_name }}
+        REGISTRY: ${{ vars.REGISTRY_URL }}/${{ secrets.GCP_PROJECT_ID }}
+        REPOSITORY: ${{ secrets.REPOSITORY }}
         IMAGE_TAG: ${{ github.sha }}
-        GH_ACTOR: ${{ github.actor }}
-        GH_PASSWORD: ${{ inputs.github_token }}
+        DOCKER_BUILD_ARGUMENTS: >
+          --platform=linux/amd64 --provenance=false
+          --output=type=image,name=$REGISTRY/$REPOSITORY,push-by-digest=true,name-canonical=true
       run: |
         set -x
+        cp scripts/dotenvcreate.mjs apps/api/src/dotenvcreate.mjs
         cd apps/api && pnpm run docker:build
 
     - name: Tag and test
       id: build-image
       shell: bash
       env:
-        REGISTRY_OWNER: novuhq
-        DOCKER_NAME: ${{ inputs.docker_name }}
+        REGISTRY: ${{ vars.REGISTRY_URL }}/${{ secrets.GCP_PROJECT_ID }}
+        REPOSITORY: novu/api
         IMAGE_TAG: ${{ github.sha }}
-        GH_ACTOR: ${{ github.actor }}
-        GH_PASSWORD: ${{ inputs.github_token }}
       run: |
         echo "Built image"
-        docker tag novu-api ghcr.io/$REGISTRY_OWNER/$DOCKER_NAME:$IMAGE_TAG
+        docker tag novu-api $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
-        docker run --network=host --name api -dit --env NODE_ENV=test ghcr.io/$REGISTRY_OWNER/$DOCKER_NAME:$IMAGE_TAG
+        docker run --network=host --name api -dit --env NODE_ENV=test $REGISTRY/$REPOSITORY:$IMAGE_TAG
         docker run --network=host appropriate/curl --retry 10 --retry-delay 5 --retry-connrefused http://127.0.0.1:1337/v1/health-check | grep 'ok'
 
-        echo "IMAGE=ghcr.io/$REGISTRY_OWNER/$DOCKER_NAME:$IMAGE_TAG" >> $GITHUB_OUTPUT
+        echo "IMAGE=$REGISTRY/$REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
     - name: Optionally tag docker image
       if: ${{ inputs.tag }}
       shell: bash
       env:
-        REGISTRY_OWNER: novuhq
-        DOCKER_NAME: ${{ inputs.docker_name }}
+        REGISTRY: ${{ vars.REGISTRY_URL }}/${{ secrets.GCP_PROJECT_ID }}
+        REPOSITORY: novu/api
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker tag ghcr.io/$REGISTRY_OWNER/$DOCKER_NAME:$IMAGE_TAG ghcr.io/$REGISTRY_OWNER/$DOCKER_NAME:${{ inputs.tag }}
+        docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:${{ inputs.tag }}
 
     - name: Push PR tag image
       if: ${{ inputs.push == 'true' }}
       shell: bash
       env:
-        REGISTRY_OWNER: novuhq
-        DOCKER_NAME: ${{ inputs.docker_name }}
+        REGISTRY: ${{ vars.REGISTRY_URL }}/${{ secrets.GCP_PROJECT_ID }}
+        REPOSITORY: novu/api
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker push ghcr.io/$REGISTRY_OWNER/$DOCKER_NAME:$IMAGE_TAG
+        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
     - name: Push custom tag image
       if: ${{ inputs.push == 'true' && inputs.tag }}
       shell: bash
       env:
-        REGISTRY_OWNER: novuhq
-        DOCKER_NAME: ${{ inputs.docker_name }}
+        REGISTRY: ${{ vars.REGISTRY_URL }}/${{ secrets.GCP_PROJECT_ID }}
+        REPOSITORY: novu/api
       run: |
-        docker push ghcr.io/$REGISTRY_OWNER/$DOCKER_NAME:${{ inputs.tag }}
+        docker push $REGISTRY/$REPOSITORY:${{ inputs.tag }}

@@ -1,5 +1,8 @@
 name: Deploy Embed to Netlify
 
+env:
+  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
 # Controls when the action will run. Triggers the workflow on push or pull request
 on:
   workflow_call:
@@ -36,7 +39,7 @@ jobs:
       deployments: write
       id-token: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-project
         with:
           slim: 'true'
@@ -49,18 +52,3 @@ jobs:
         env:
           WIDGET_URL: ${{ inputs.widget_url }}
         run: CI='' npm run build:prod
-
-      - name: Deploy Embed
-        uses: nwtgck/actions-netlify@v1.2
-        with:
-          publish-dir: libs/embed/dist
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: ${{ inputs.netlify_deploy_message }}
-          production-deploy: true
-          alias: ${{ inputs.netlify_alias }}
-          github-deployment-environment: ${{ inputs.netlify_gh_env }}
-          github-deployment-description: Embed Deployment
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ inputs.netlify_site_id }}
-        timeout-minutes: 1
