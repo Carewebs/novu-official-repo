@@ -29,8 +29,8 @@ RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM
     if [ -n "${BULL_MQ_PRO_NPM_TOKEN}" ] ; then echo 'Building with Enterprise Edition of Novu'; rm -f .npmrc ; cp .npmrc-cloud .npmrc ; fi
 
 RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \
-    pnpm install --reporter=silent && \
-    pnpm build:ws
+    NX_CLOUD_ACCESS_TOKEN=''  pnpm install --reporter=silent && \
+    NX_CLOUD_ACCESS_TOKEN='' pnpm build:ws
 
 RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \
     if $BULL_MQ_PRO_NPM_TOKEN ; then rm -f .npmrc ; fi
