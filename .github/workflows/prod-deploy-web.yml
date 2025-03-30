@@ -60,8 +60,8 @@ jobs:
             --platform=linux/amd64
             --output=type=image,name=$REGISTRY/$REPOSITORY,push-by-digest=true,name-canonical=true
         run: |
-          cp scripts/dotenvcreate.mjs apps/web/src/dotenvcreate.mjs
-          cd apps/web && pnpm --silent --workspace-root pnpm-context -- apps/web/Dockerfile | BULL_MQ_PRO_NPM_TOKEN=${BULL_MQ_PRO_NPM_TOKEN} docker buildx build --secret id=BULL_MQ_PRO_NPM_TOKEN --build-arg PACKAGE_PATH=apps/web - -t novu-web --load $DOCKER_BUILD_ARGUMENTS
+          cd apps/web
+          docker buildx build -f ./Dockerfile -t novu-web ./../..
           docker tag novu-web $REGISTRY/$REPOSITORY:latest
           docker tag novu-web $REGISTRY/$REPOSITORY:prod
           docker tag novu-web $REGISTRY/$REPOSITORY:$IMAGE_TAG
