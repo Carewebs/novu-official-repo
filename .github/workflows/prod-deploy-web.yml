@@ -61,7 +61,7 @@ jobs:
             --output=type=image,name=$REGISTRY/$REPOSITORY,push-by-digest=true,name-canonical=true
         run: |
           cd apps/web
-          docker buildx build -f ./Dockerfile -t novu-web ./../..
+          docker buildx build -f ./Dockerfile -t novu-web ./../.. --load 
           docker tag novu-web $REGISTRY/$REPOSITORY:latest
           docker tag novu-web $REGISTRY/$REPOSITORY:prod
           docker tag novu-web $REGISTRY/$REPOSITORY:$IMAGE_TAG
