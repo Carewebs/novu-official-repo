@@ -4,6 +4,7 @@ ENV NX_DAEMON=false
 
 RUN npm install -g pnpm@8.9.0 --loglevel notice
 RUN npm i pm2 -g
+RUN apk --no-cache add g++ make py3-pip
 
 USER 1000
 WORKDIR /usr/src/app
@@ -23,17 +24,10 @@ COPY --chown=1000:1000 packages/stateless ./packages/stateless
 COPY --chown=1000:1000 packages/node ./packages/node
 COPY --chown=1000:1000 packages/application-generic ./packages/application-generic
 
-COPY --chown=1000:1000 ["tsconfig.json","tsconfig.base.json","nx.json","pnpm-workspace.yaml","pnpm-lock.yaml", ".npmrc", "./"]
+COPY --chown=1000:1000 ["tsconfig.json","tsconfig.base.json","pnpm-workspace.yaml","pnpm-lock.yaml", ".npmrc", "./"]
 
-RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \
-    if [ -n "${BULL_MQ_PRO_NPM_TOKEN}" ] ; then echo 'Building with Enterprise Edition of Novu'; rm -f .npmrc ; cp .npmrc-cloud .npmrc ; fi
-
-RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \
-    NX_CLOUD_ACCESS_TOKEN=''  pnpm install --reporter=silent && \
-    NX_CLOUD_ACCESS_TOKEN='' pnpm build:ws
-
-RUN --mount=type=secret,id=BULL_MQ_PRO_NPM_TOKEN,uid=1000 export BULL_MQ_PRO_NPM_TOKEN=$(cat /run/secrets/BULL_MQ_PRO_NPM_TOKEN) && \
-    if $BULL_MQ_PRO_NPM_TOKEN ; then rm -f .npmrc ; fi
+RUN pnpm install --verbose && \
+    pnpm build:ws
 
 WORKDIR /usr/src/app/apps/ws
 
