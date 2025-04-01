@@ -43,8 +43,7 @@ export class BullMqService {
   private _queue: Queue;
   private _worker: Worker;
 
-  public static readonly pro: boolean =
-    process.env.NOVU_MANAGED_SERVICE !== undefined;
+  public static readonly pro: boolean = false;
 
   constructor(
     private workflowInMemoryProviderService: WorkflowInMemoryProviderService
@@ -109,10 +108,8 @@ export class BullMqService {
       }),
     };
 
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const QueueClass = !BullMqService.pro
-      ? Queue
-      : require('@taskforcesh/bullmq-pro').QueuePro;
+    // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/no-explicit-any
+    const QueueClass: any = Queue;
 
     Logger.log(
       `Creating queue ${topic}. BullMQ pro is ${
@@ -135,10 +132,8 @@ export class BullMqService {
     processor?: string | Processor<any, unknown | void, string>,
     workerOptions?: WorkerOptions
   ) {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const WorkerClass = !BullMqService.pro
-      ? Worker
-      : require('@taskforcesh/bullmq-pro').WorkerPro;
+    // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/no-explicit-any
+    const WorkerClass: any = Worker;
 
     const { concurrency, connection, lockDuration, settings } = workerOptions;
 

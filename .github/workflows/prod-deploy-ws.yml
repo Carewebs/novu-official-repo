@@ -58,7 +58,7 @@ jobs:
             --output=type=image,name=$REGISTRY/$REPOSITORY,push-by-digest=true,name-canonical=true
         run: |
           cp scripts/dotenvcreate.mjs apps/ws/src/dotenvcreate.mjs
-          docker buildx build --secret id=BULL_MQ_PRO_NPM_TOKEN -t $REGISTRY/$REPOSITORY:$IMAGE_TAG --load -f apps/ws/Dockerfile . $DOCKER_BUILD_ARGUMENTS
+          docker buildx build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG --load -f apps/ws/Dockerfile . $DOCKER_BUILD_ARGUMENTS
           docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:prod
           docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:latest
           docker push $REGISTRY/$REPOSITORY:prod
