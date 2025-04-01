@@ -17,7 +17,6 @@ COPY --chown=1000:1000 ./meta .
 COPY --chown=1000:1000 ./deps .
 COPY --chown=1000:1000 ./pkg .
 
-RUN rm -f .npmrc && cp .npmrc-cloud .npmrc
 
 RUN --mount=type=cache,id=pnpm-store-worker,target=/root/.pnpm-store\
     pnpm install --filter "novuhq" --filter "{${PACKAGE_PATH}}..."\

@@ -17,8 +17,6 @@ COPY --chown=1000:1000 ./meta .
 COPY --chown=1000:1000 ./deps .
 COPY --chown=1000:1000 ./pkg .
 
-RUN rm -f .npmrc && cp .npmrc-cloud .npmrc
-
 RUN --mount=type=cache,id=pnpm-store-inbound-mail,target=/root/.pnpm-store\
     pnpm install --reporter=silent --filter "novuhq" --filter "{${PACKAGE_PATH}}..."\
  --frozen-lockfile\
