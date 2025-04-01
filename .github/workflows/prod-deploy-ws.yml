@@ -22,7 +22,7 @@ jobs:
 
 
       - name: build ws
-        run: pnpm build
+        run: pnpm build:ws
 
       - name: Set Up Docker Buildx
         uses: docker/setup-buildx-action@v3
