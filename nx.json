@@ -1,0 +1,44 @@
+{
+  "extends": "@nrwl/workspace/presets/npm.json",
+  "npmScope": "novuhq",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "test", "lint", "package", "prepare"]
+      }
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "inputs": ["!{projectRoot}/enterprise/**/*"],
+        "projects": "dependencies"
+      }
+    ],
+    "prepare": [
+      {
+        "target": "prepare",
+        "projects": "dependencies"
+      }
+    ],
+    "package": [
+      {
+        "target": "package",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "affected": {
+    "defaultBase": "main"
+  },
+  "targetDefaults": {
+    "build-ee": {
+      "dependsOn": ["^build-ee"]
+    },
+    "build": {
+      "dependsOn": ["^build"]
+    }
+  }
+}
