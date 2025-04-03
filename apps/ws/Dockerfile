@@ -19,7 +19,7 @@ RUN pnpm config set auto-install-peers true && \
 
 RUN pnpm install --frozen-lockfile --verbose
 
-COPY packages/providers ./packages/providers
+COPY providers ./providers
 COPY apps/ws ./apps/ws
 COPY libs/dal ./libs/dal
 COPY libs/shared ./libs/shared
