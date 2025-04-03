@@ -9,25 +9,26 @@ RUN npm install -g pnpm@8.9.0 --loglevel notice && \
     npm install -g pm2 && \
     apk --no-cache add g++ make py3-pip
 
-USER 1000
+COPY .npmrc .npmrc-cloud package.json pnpm-lock.yaml ./
+RUN chown -R 1000:1000 /usr/src/app
 
-COPY --chown=1000:1000 .npmrc .npmrc-cloud package.json pnpm-lock.yaml ./
+USER 1000
 
 RUN pnpm config set auto-install-peers true && \
     pnpm config set node-linker hoisted
 
 RUN pnpm install --frozen-lockfile --verbose
 
-COPY --chown=1000:1000 providers ./providers
-COPY --chown=1000:1000 apps/ws ./apps/ws
-COPY --chown=1000:1000 libs/dal ./libs/dal
-COPY --chown=1000:1000 libs/shared ./libs/shared
-COPY --chown=1000:1000 libs/testing ./libs/testing
-COPY --chown=1000:1000 packages/client ./packages/client
-COPY --chown=1000:1000 packages/stateless ./packages/stateless
-COPY --chown=1000:1000 packages/node ./packages/node
-COPY --chown=1000:1000 packages/application-generic ./packages/application-generic
-COPY --chown=1000:1000 tsconfig.json tsconfig.base.json pnpm-workspace.yaml ./
+COPY providers ./providers
+COPY apps/ws ./apps/ws
+COPY libs/dal ./libs/dal
+COPY libs/shared ./libs/shared
+COPY libs/testing ./libs/testing
+COPY packages/client ./packages/client
+COPY packages/stateless ./packages/stateless
+COPY packages/node ./packages/node
+COPY packages/application-generic ./packages/application-generic
+COPY tsconfig.json tsconfig.base.json pnpm-workspace.yaml ./
 
 RUN pnpm build:ws
 
@@ -37,5 +38,4 @@ RUN cp src/.example.env dist/src/.env && \
     cp src/.env.development dist/src/.env.development && \
     cp src/.env.production dist/src/.env.production
 
-# Comando de execução
 CMD [ "pm2-runtime", "dist/src/main.js" ]
