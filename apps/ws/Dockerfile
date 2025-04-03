@@ -9,7 +9,7 @@ RUN npm install -g pnpm@8.9.0 --loglevel notice && \
     npm install -g pm2 && \
     apk --no-cache add g++ make py3-pip
 
-COPY .npmrc .npmrc-cloud package.json pnpm-lock.yaml ./
+COPY .npmrc package.json pnpm-lock.yaml ./
 RUN chown -R 1000:1000 /usr/src/app
 
 USER 1000
