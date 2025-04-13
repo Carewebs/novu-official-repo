@@ -5,24 +5,68 @@ name: Deploy PROD WEB
 on:
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  deploy_web_eu:
-    uses: ./.github/workflows/reusable-web-deploy.yml
-    with:
-      react_app_api_url: https://eu.api.novu.co
-      react_app_ws_url: https://eu.ws.novu.co
-      react_app_webhook_url: https://eu.webhook.novu.co
-      react_app_widget_embed_path: https://eu.embed.novu.co/embed.umd.min.js
-      react_app_sentry_dsn: https://2b5160da86384949be4cc66679c54e79@o1161119.ingest.sentry.io/6250907
-      react_app_environment: production
-      react_app_mail_server_domain: eu.inbound-mail.novu.co
-      react_app_hubspot_embed: 44416662
-      netlify_deploy_message: Prod deployment
-      netlify_alias: prod
-      netlify_gh_env: Production
-      netlify_site_id: d2e8b860-7016-4202-9256-ebca0f13259a
-      clerk_publishable_key: pk_live_Y2xlcmsuZXUuZGFzaGJvYXJkLm5vdnUuY28k
-      clerk_is_ee_auth_enabled: true
-      new_dashboard_url: https://eu.dashboard-v2.novu.co
-    secrets: inherit
+  build_prod_image:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    outputs:
+      docker_image: ${{ steps.build-image.outputs.IMAGE }}
+    permissions:
+      contents: read
+      packages: write
+      deployments: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-project
+        with:
+          submodules: false
+
+      - name: build web
+        run: pnpm build:web --skip-nx-cache
+
+      - name: Set Up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver-opts: 'image=moby/buildkit:v0.13.1'
+
+      - name: Prepare
+        shell: bash
+        run: |
+          service="novu/web-ee"
+          echo "SERVICE_NAME=$(basename "${service//-/-}")" >> $GITHUB_ENV
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+          token_format: 'access_token'
+
+      - name: Login to GCR
+        shell: bash
+        run: |-
+          echo '${{ steps.auth.outputs.access_token }}' | docker login -u oauth2accesstoken --password-stdin https://${{vars.REGISTRY_URL}}
+
+      - name: Build, tag, and push image to GCP Artifact
+        id: build-image
+        env:
+          REGISTRY: ${{ vars.REGISTRY_URL }}/${{ secrets.GCP_PROJECT_ID }}
+          REPOSITORY: ${{ secrets.REPOSITORY }}/novu/web
+          IMAGE_TAG: ${{ github.sha }}
+          DOCKER_BUILD_ARGUMENTS: >
+            --platform=linux/amd64
+            --output=type=image,name=$REGISTRY/$REPOSITORY,push-by-digest=true,name-canonical=true
+        run: |
+          cd apps/web
+          docker buildx build -f ./Dockerfile -t novu-web ./../.. --load
+          docker tag novu-web $REGISTRY/$REPOSITORY:latest
+          docker tag novu-web $REGISTRY/$REPOSITORY:prod
+          docker tag novu-web $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
+          docker push $REGISTRY/$REPOSITORY:prod
+          docker push $REGISTRY/$REPOSITORY:latest
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          echo "IMAGE=$REGISTRY/$REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
